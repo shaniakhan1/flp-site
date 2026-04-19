@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLP Marketing Group &mdash; A Private Consultancy</title>
+<meta name="description" content="FLP Marketing Group. A private consultancy for founders and houses across luxury, beauty, and emerging categories. By introduction.">
+<meta property="og:title" content="FLP Marketing Group">
+<meta property="og:description" content="A private consultancy for founders and houses with an understanding of restraint.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Forum&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --espresso: #1c1410;
+    --espresso-deep: #120b08;
+    --cream: #e8dfd0;
+    --cream-warm: #d9cdb6;
+    --gold: #b08442;
+    --gold-muted: #8a6532;
+    --gold-pale: #d4ae73;
+    --oxblood: #3d1818;
+    --rule: rgba(232, 223, 208, 0.18);
+    --rule-strong: rgba(232, 223, 208, 0.35);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--espresso);
+    color: var(--cream);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    mix-blend-mode: overlay;
+    opacity: 0.4;
+  }
+
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    mix-blend-mode: difference;
+  }
+
+  .mark {
+    font-family: 'Forum', serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--cream);
+  }
+
+  .meta {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream);
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 40px 80px;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-text {
+    opacity: 0;
+    animation: rise 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::after {
+    content: '';
+    height: 1px;
+    width: 60px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 6.5vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gold);
+  }
+
+  .hero-tag {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.5;
+    color: var(--cream-warm);
+    max-width: 440px;
+    margin-bottom: 48px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gold);
+    transition: all 0.4s ease;
+  }
+
+  .hero-cta:hover { color: var(--gold); letter-spacing: 0.35em; }
+  .hero-cta .arrow { transition: transform 0.4s ease; }
+  .hero-cta:hover .arrow { transform: translateX(6px); }
+
+  /* ============ HERO ARTWORK (Art Deco composition) ============ */
+  .hero-art {
+    position: relative;
+    aspect-ratio: 3/4;
+    background: linear-gradient(160deg, var(--espresso-deep) 0%, #2a1e17 60%, var(--espresso) 100%);
+    border: 1px solid var(--gold-muted);
+    overflow: hidden;
+    opacity: 0;
+    animation: rise 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s forwards;
+  }
+
+  .hero-art svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-art .caption {
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold-pale);
+    z-index: 5;
+  }
+
+  .hero-art .caption-right {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-family: 'Forum', serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--gold-pale);
+    z-index: 5;
+  }
+
+  /* Deco geometric spin */
+  @keyframes slowSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .deco-rotate {
+    transform-origin: center;
+    animation: slowSpin 120s linear infinite;
+  }
+
+  /* ============ PHILOSOPHY ============ */
+  .philosophy {
+    padding: 160px 40px;
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .philosophy-mark {
+    font-family: 'Forum', serif;
+    font-size: 48px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 48px;
+    opacity: 0.7;
+  }
+
+  .philosophy p {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(22px, 2.8vw, 36px);
+    line-height: 1.35;
+    color: var(--cream);
+    letter-spacing: -0.01em;
+  }
+
+  .philosophy p em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* ============ DISCIPLINES ============ */
+  .disciplines {
+    padding: 140px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.1;
+    color: var(--cream);
+    text-align: center;
+    margin-bottom: 80px;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .disciplines-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--rule-strong);
+    border: 1px solid var(--rule-strong);
+  }
+
+  .discipline {
+    background: var(--espresso);
+    padding: 56px 48px;
+    position: relative;
+    transition: background 0.5s ease;
+  }
+
+  .discipline:hover { background: var(--espresso-deep); }
+
+  .discipline-number {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .discipline h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.2;
+    color: var(--cream);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .discipline p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--cream-warm);
+    max-width: 360px;
+  }
+
+  /* ============ LETTER ============ */
+  .letter {
+    padding: 140px 40px;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+
+  .letter-mark {
+    font-family: 'Forum', serif;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    margin-bottom: 48px;
+    text-transform: uppercase;
+  }
+
+  .letter-mark::before,
+  .letter-mark::after {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    vertical-align: middle;
+    margin: 0 20px;
+    opacity: 0.6;
+  }
+
+  .letter-body {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(18px, 2vw, 23px);
+    line-height: 1.65;
+    color: var(--cream);
+    text-align: left;
+    margin-bottom: 48px;
+  }
+
+  .letter-body p {
+    margin-bottom: 20px;
+  }
+
+  .letter-body p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .letter-body em {
+    font-style: italic;
+    color: var(--cream);
+  }
+
+  .signature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .signature-name {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: var(--cream);
+    text-transform: uppercase;
+  }
+
+  .signature-title {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* ============ SPREAD ============ */
+  .spread {
+    padding: 140px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .spread-art {
+    aspect-ratio: 4/5;
+    background: linear-gradient(200deg, #2a1e17 0%, var(--espresso-deep) 100%);
+    border: 1px solid var(--gold-muted);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spread-art svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .spread-art .corner-mark {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-family: 'Forum', serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--gold-pale);
+    z-index: 5;
+  }
+
+  .spread-art .bottom-mark {
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--gold-pale);
+    z-index: 5;
+  }
+
+  .spread-text .pullquote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(26px, 3vw, 42px);
+    line-height: 1.25;
+    color: var(--cream);
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+
+  .spread-text .pullquote em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .spread-text .attribution {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream-warm);
+  }
+
+  .spread-text .attribution::before {
+    content: '— ';
+    color: var(--gold);
+  }
+
+  /* ============ CLIENTELE ============ */
+  .clientele {
+    padding: 140px 40px;
+    text-align: center;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--espresso-deep);
+  }
+
+  .clientele-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 48px;
+    margin-top: 60px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .clientele-item {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(22px, 2.4vw, 32px);
+    color: var(--cream);
+    letter-spacing: -0.01em;
+  }
+
+  .clientele-sep {
+    color: var(--gold);
+    font-family: 'Forum', serif;
+    font-size: 20px;
+    align-self: center;
+  }
+
+  /* ============ INQUIRY ============ */
+  .inquiry {
+    padding: 180px 40px 140px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .inquiry-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 5.5vw, 72px);
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 32px;
+    letter-spacing: -0.02em;
+  }
+
+  .inquiry-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .inquiry-body {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--cream-warm);
+    margin-bottom: 56px;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .inquiry-email {
+    display: inline-block;
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(22px, 3vw, 32px);
+    color: var(--cream);
+    text-decoration: none;
+    padding: 20px 40px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    letter-spacing: -0.01em;
+    transition: all 0.4s ease;
+  }
+
+  .inquiry-email:hover {
+    background: var(--oxblood);
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  footer {
+    padding: 48px 40px 40px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream-warm);
+  }
+
+  footer a {
+    color: var(--cream-warm);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  footer a:hover { color: var(--gold); }
+
+  footer .footer-left {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    .topbar { padding: 20px 24px; }
+    .meta { display: none; }
+
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 100px 24px 60px;
+      gap: 40px;
+    }
+    .hero-art { aspect-ratio: 4/5; order: -1; }
+
+    .philosophy { padding: 100px 24px; }
+
+    .disciplines { padding: 100px 24px; }
+    .disciplines-grid { grid-template-columns: 1fr; }
+    .discipline { padding: 40px 32px; }
+
+    .letter { padding: 100px 24px; }
+    .letter-mark::before,
+    .letter-mark::after { width: 20px; margin: 0 12px; }
+
+    .spread {
+      grid-template-columns: 1fr;
+      padding: 100px 24px;
+      gap: 40px;
+    }
+
+    .clientele { padding: 100px 24px; }
+    .clientele-list { gap: 20px; flex-direction: column; }
+    .clientele-sep { display: none; }
+
+    .inquiry { padding: 120px 24px 100px; }
+    .inquiry-email { padding: 20px 24px; font-size: 22px; }
+
+    footer {
+      padding: 32px 24px;
+      flex-direction: column;
+      text-align: center;
+    }
+    footer .footer-left { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="mark">FLP</div>
+  <div class="meta">Est. MMXVII &middot; Houston</div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">A Private Consultancy</div>
+    <h1>Taste, <em>engineered</em>. Presence, built to last.</h1>
+    <p class="hero-tag">FLP Marketing Group directs brand, publicity, and strategy for a small roster of founders and houses across luxury, beauty, and emerging categories.</p>
+    <a href="#inquiry" class="hero-cta">
+      <span>Inquire</span>
+      <span class="arrow">&rarr;</span>
+    </a>
+  </div>
+
+  <!-- Art Deco hero composition -->
+  <div class="hero-art">
+    <svg viewBox="0 0 400 533" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#b08442" stop-opacity="0.4"/>
+          <stop offset="60%" stop-color="#b08442" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#b08442" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="rayGold" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#d4ae73" stop-opacity="0"/>
+          <stop offset="50%" stop-color="#d4ae73" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#d4ae73" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Soft gold glow behind composition -->
+      <circle cx="200" cy="266" r="180" fill="url(#goldGlow)"/>
+
+      <!-- Outer ornamental frame -->
+      <rect x="30" y="30" width="340" height="473" fill="none" stroke="#b08442" stroke-width="0.5" opacity="0.5"/>
+      <rect x="40" y="40" width="320" height="453" fill="none" stroke="#b08442" stroke-width="0.5" opacity="0.3"/>
+
+      <!-- Corner deco flourishes -->
+      <g stroke="#b08442" stroke-width="0.8" fill="none" opacity="0.7">
+        <!-- Top left -->
+        <path d="M 30 70 L 30 30 L 70 30"/>
+        <path d="M 40 80 L 40 40 L 80 40"/>
+        <!-- Top right -->
+        <path d="M 330 30 L 370 30 L 370 70"/>
+        <path d="M 320 40 L 360 40 L 360 80"/>
+        <!-- Bottom left -->
+        <path d="M 70 503 L 30 503 L 30 463"/>
+        <path d="M 80 493 L 40 493 L 40 453"/>
+        <!-- Bottom right -->
+        <path d="M 370 463 L 370 503 L 330 503"/>
+        <path d="M 360 453 L 360 493 L 320 493"/>
+      </g>
+
+      <!-- Center: rotating deco star -->
+      <g class="deco-rotate" style="transform-origin: 200px 266px;">
+        <!-- Sunburst rays -->
+        <g opacity="0.6">
+          <line x1="200" y1="120" x2="200" y2="170" stroke="url(#rayGold)" stroke-width="1"/>
+          <line x1="200" y1="412" x2="200" y2="362" stroke="url(#rayGold)" stroke-width="1"/>
+          <line x1="54" y1="266" x2="104" y2="266" stroke="#b08442" stroke-width="0.8" opacity="0.8"/>
+          <line x1="346" y1="266" x2="296" y2="266" stroke="#b08442" stroke-width="0.8" opacity="0.8"/>
+          <!-- Diagonal rays -->
+          <line x1="100" y1="166" x2="135" y2="201" stroke="#b08442" stroke-width="0.6" opacity="0.6"/>
+          <line x1="300" y1="166" x2="265" y2="201" stroke="#b08442" stroke-width="0.6" opacity="0.6"/>
+          <line x1="100" y1="366" x2="135" y2="331" stroke="#b08442" stroke-width="0.6" opacity="0.6"/>
+          <line x1="300" y1="366" x2="265" y2="331" stroke="#b08442" stroke-width="0.6" opacity="0.6"/>
+        </g>
+
+        <!-- Concentric deco diamonds -->
+        <g fill="none" stroke="#b08442" stroke-width="0.8">
+          <polygon points="200,146 280,266 200,386 120,266" opacity="0.5"/>
+          <polygon points="200,176 250,266 200,356 150,266" opacity="0.7"/>
+        </g>
+
+        <!-- Inner circles -->
+        <circle cx="200" cy="266" r="60" fill="none" stroke="#b08442" stroke-width="0.8" opacity="0.6"/>
+        <circle cx="200" cy="266" r="45" fill="none" stroke="#d4ae73" stroke-width="0.5" opacity="0.8"/>
+        <circle cx="200" cy="266" r="28" fill="none" stroke="#b08442" stroke-width="1"/>
+
+        <!-- Central ornament -->
+        <g transform="translate(200, 266)">
+          <circle r="8" fill="#b08442" opacity="0.9"/>
+          <circle r="14" fill="none" stroke="#d4ae73" stroke-width="0.6"/>
+          <!-- Four cardinal dots -->
+          <circle cx="0" cy="-22" r="1.5" fill="#d4ae73"/>
+          <circle cx="0" cy="22" r="1.5" fill="#d4ae73"/>
+          <circle cx="-22" cy="0" r="1.5" fill="#d4ae73"/>
+          <circle cx="22" cy="0" r="1.5" fill="#d4ae73"/>
+        </g>
+      </g>
+
+      <!-- Bottom ornamental rule -->
+      <g opacity="0.7">
+        <line x1="100" y1="430" x2="160" y2="430" stroke="#b08442" stroke-width="0.5"/>
+        <circle cx="170" cy="430" r="1.5" fill="#b08442"/>
+        <circle cx="200" cy="430" r="2.5" fill="#b08442"/>
+        <circle cx="230" cy="430" r="1.5" fill="#b08442"/>
+        <line x1="240" y1="430" x2="300" y2="430" stroke="#b08442" stroke-width="0.5"/>
+      </g>
+
+      <!-- Engraved wordmark -->
+      <text x="200" y="465" text-anchor="middle" font-family="Forum, serif" font-size="10" letter-spacing="6" fill="#d4ae73" opacity="0.85">MMXVII</text>
+    </svg>
+    <div class="caption-right">PL. I</div>
+    <div class="caption">De la Maison</div>
+  </div>
+</section>
+
+<!-- ============ PHILOSOPHY ============ -->
+<section class="philosophy reveal">
+  <div class="philosophy-mark">&sect;</div>
+  <p>We do not build <em>noise</em>. We build the kind of brand a room leans forward to hear.</p>
+</section>
+
+<!-- ============ DISCIPLINES ============ -->
+<section class="disciplines">
+  <div class="reveal">
+    <div class="section-eyebrow">The Practice</div>
+    <h2 class="section-title">Four <em>disciplines</em>, one standard.</h2>
+  </div>
+
+  <div class="disciplines-grid reveal">
+    <div class="discipline">
+      <div class="discipline-number">I.</div>
+      <h3>Brand Direction</h3>
+      <p>Positioning, voice, and visual architecture for founders building something meant to outlast a trend cycle.</p>
+    </div>
+    <div class="discipline">
+      <div class="discipline-number">II.</div>
+      <h3>Publicity</h3>
+      <p>Earned press and editorial placement. We do not pitch. We introduce, and the right rooms recognize what they are looking at.</p>
+    </div>
+    <div class="discipline">
+      <div class="discipline-number">III.</div>
+      <h3>Strategy</h3>
+      <p>Growth, partnerships, and long-range market positioning. Quiet decisions that compound into category definition.</p>
+    </div>
+    <div class="discipline">
+      <div class="discipline-number">IV.</div>
+      <h3>Counsel</h3>
+      <p>Private advisory retained by founders and operators navigating scale, succession, or the gap between vision and execution.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LETTER FROM THE PRINCIPAL ============ -->
+<section class="letter reveal">
+  <div class="letter-mark">A Letter</div>
+
+  <div class="letter-body">
+    <p>I built this firm in 2017 because I was tired of watching beautiful brands get loud. The ones I admired never raised their voice. They built rooms people wanted to be inside, and let the rooms do the work.</p>
+    <p>FLP is small on purpose. A handful of engagements a year, chosen carefully, built slowly. If that sounds like the way you want to build, we should speak.</p>
+  </div>
+
+  <div class="signature">
+    <div class="signature-name">Shania Khan</div>
+    <div class="signature-title">Founder &amp; Principal</div>
+  </div>
+</section>
+
+<!-- ============ SPREAD ============ -->
+<section class="spread">
+  <!-- Typographic editorial composition -->
+  <div class="spread-art reveal">
+    <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="goldLine" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#b08442" stop-opacity="0"/>
+          <stop offset="50%" stop-color="#b08442" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#b08442" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Editorial border -->
+      <rect x="24" y="24" width="352" height="452" fill="none" stroke="#b08442" stroke-width="0.5" opacity="0.4"/>
+
+      <!-- Top metadata line -->
+      <line x1="40" y1="70" x2="360" y2="70" stroke="url(#goldLine)" stroke-width="0.5"/>
+      <text x="40" y="62" font-family="Forum, serif" font-size="9" letter-spacing="3" fill="#d4ae73" opacity="0.85">VOLUME ONE</text>
+      <text x="360" y="62" text-anchor="end" font-family="Forum, serif" font-size="9" letter-spacing="3" fill="#d4ae73" opacity="0.85">NO. IV</text>
+
+      <!-- Massive ornamental ampersand -->
+      <text x="200" y="280" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-weight="300" font-size="240" fill="#b08442" opacity="0.9">&amp;</text>
+
+      <!-- Subscript -->
+      <text x="200" y="330" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="14" fill="#e8dfd0" opacity="0.85">the quiet work</text>
+
+      <!-- Decorative mid-ornament -->
+      <g transform="translate(200, 380)" opacity="0.7">
+        <line x1="-60" y1="0" x2="-20" y2="0" stroke="#b08442" stroke-width="0.5"/>
+        <circle cx="-10" cy="0" r="1" fill="#b08442"/>
+        <circle cx="0" cy="0" r="2" fill="#b08442"/>
+        <circle cx="10" cy="0" r="1" fill="#b08442"/>
+        <line x1="20" y1="0" x2="60" y2="0" stroke="#b08442" stroke-width="0.5"/>
+      </g>
+
+      <!-- Bottom caption -->
+      <text x="200" y="425" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="11" fill="#d9cdb6" opacity="0.8">An unpublished note on restraint</text>
+
+      <!-- Bottom rule -->
+      <line x1="40" y1="445" x2="360" y2="445" stroke="url(#goldLine)" stroke-width="0.5"/>
+    </svg>
+    <div class="corner-mark">FLP</div>
+    <div class="bottom-mark">Plate II</div>
+  </div>
+
+  <div class="spread-text reveal">
+    <p class="pullquote">The firms we admire do not advertise <em>what they do</em>. They are known by the caliber of who they keep.</p>
+    <div class="attribution">From the house</div>
+  </div>
+</section>
+
+<!-- ============ CLIENTELE ============ -->
+<section class="clientele">
+  <div class="reveal">
+    <div class="section-eyebrow">Categories of Practice</div>
+    <h2 class="section-title">Select <em>representation</em>.</h2>
+    <div class="clientele-list">
+      <span class="clientele-item">Luxury</span>
+      <span class="clientele-sep">&bull;</span>
+      <span class="clientele-item">Beauty</span>
+      <span class="clientele-sep">&bull;</span>
+      <span class="clientele-item">Hospitality</span>
+      <span class="clientele-sep">&bull;</span>
+      <span class="clientele-item">Emerging Categories</span>
+      <span class="clientele-sep">&bull;</span>
+      <span class="clientele-item">Wellness</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INQUIRY ============ -->
+<section class="inquiry" id="inquiry">
+  <div class="reveal">
+    <h2 class="inquiry-title">Correspondence is <em>selective</em>.</h2>
+    <p class="inquiry-body">Retainer engagements begin by introduction. A brief note outlining the project is the right first step.</p>
+    <a href="mailto:office@flpmarketinggroup.com?subject=Inquiry" class="inquiry-email">office@flpmarketinggroup.com</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-left">
+    <span>&copy; MMXXVI FLP Marketing Group</span>
+    <a href="https://shaniakhan.com" target="_blank" rel="noopener">Principal</a>
+  </div>
+  <div>Houston &middot; Texas</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
