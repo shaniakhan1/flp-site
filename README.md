@@ -2,7 +2,7 @@
 
 Static marketing site with two clearly separated routes:
 
-- **Upcoming funnel pilot:** one landing page, inquiry and booking path, approved email follow-up, and defined ongoing management. Planned pricing is $1,500 setup + $1,500/month from launch, with required software costs still to be published. Visitors can explore the local demo, check fit, and express interest by email. Enrollment and payments are closed.
+- **Inquiry and booking follow-up:** one landing page, inquiry and booking path, approved email follow-up, and defined ongoing management. Published service fees are $1,500 setup + $1,500/month from launch, with required software costs, compatibility, and setup availability confirmed individually before payment. Visitors can explore the local demo, check fit, and express interest by email. The website accepts inquiries by email; there is no checkout or payment collection.
 - **Private advisory & implementation:** new engagements start at $10,000/month, with final scope, deliverables, working cadence, access, resources, and price agreed individually. The inquiry link opens the visitor's email app with a brief to complete.
 
 New engagements do not include ongoing social media posting. Existing clients retain their agreed scope and pricing. The public site does not disclose any existing client's fees or workload.
@@ -15,6 +15,10 @@ New engagements do not include ongoing social media posting. Existing clients re
 - The fit checker runs locally; custom requests link to the private engagement section. Inquiry links require the visitor to send an email themselves.
 - The customer journey uses fictional sample data. It does not send messages or imply actual client results.
 - Founder photograph reused from https://shaniakhan.com/hero.jpg without identity edits.
+
+## Design and interaction
+
+The approved first-interaction concept leads the page: a calm white and charcoal interface, restrained green accents, and three customer situations. Each situation changes the example email and explains FLP’s role. Public marketing uses service and setup-availability wording rather than internal pilot terminology. The fit checker clears stale results after an answer changes.
 
 ## Local preview
 
