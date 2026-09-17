@@ -11,3 +11,5 @@
 @media(max-width:1050px){.private-grid{gap:45px}}
 @media(max-width:760px){.private-grid{grid-template-columns:1fr;gap:30px}.private-card{padding:26px}.private-card .private-price{font-size:46px}.availability-banner{font-size:10px}.availability-banner span{padding-inline:4px}}
 @media(max-width:370px){.private-card{padding:22px}.private-card .private-price{font-size:40px}.private-price small{font-size:12px}.private-card .button{font-size:12px}}
+
+.social-links{display:flex;flex-wrap:wrap;gap:4px 18px}.social-links a{display:inline-flex;align-items:center;min-height:44px}

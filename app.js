@@ -26,7 +26,7 @@
     const subject=fits?'FLP funnel pilot interest':'FLP package fit question';
     const body=`Hello FLP,\n\nI have reviewed the funnel package.\nExisting demand: ${demand==='yes'?'Yes':'No'}\nRequested scope: ${scope==='standard'?'Standard funnel package':'Broader or custom work'}\n\nPlease share the next step.\n`;
     const link=document.getElementById('inquiry-link');
-    link.href=custom?'#private-advisory':'mailto:office@flpmarketinggroup.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    link.href=custom?'#private-advisory':'mailto:shania@flpmarketinggroup.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
     link.textContent=custom?'See private advisory & implementation ↗':fits?'Email FLP about the pilot ↗':'Email FLP a fit question ↗';
     document.querySelector('#fit-result .small-copy').textContent=custom?'Review the starting price and scope, then inquire by email.':'Opens your email app. Nothing is sent automatically.';
     document.getElementById('fit-result').hidden=false;
