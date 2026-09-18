@@ -1,5 +1,13 @@
 'use strict';
 (() => {
+  const mobileMenu = document.querySelector('.mobile-nav');
+  mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { mobileMenu.open = false; }));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && mobileMenu.open) {
+      mobileMenu.open = false;
+      mobileMenu.querySelector('summary').focus();
+    }
+  });
   const situations = {
     new: {event:'01 / Inquiry received',heading:'They know what to do next.',explanation:'Your approved confirmation gives them the booking link. Your business contact receives the inquiry.',sender:'The Good Room → Jamie',subject:'About your organizing consultation',email:'Hi Jamie, thanks for getting in touch. We’d love to hear about your space. Here’s the link to choose a consultation time.',status:'Approved confirmation + booking link'},
     quiet: {event:'02 / No response yet',heading:'The follow-up is already planned.',explanation:'If there’s no reply, booking, or opt-out, the next approved email goes out on the agreed schedule.',sender:'The Good Room → Jamie',subject:'Still thinking about your space?',email:'Hi Jamie, is organizing your space still on your list? If you’d like to talk it through, you can choose a consultation time here.',status:'Scheduled follow-up · Your approved wording'},
