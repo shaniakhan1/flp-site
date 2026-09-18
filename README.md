@@ -18,16 +18,26 @@ New engagements do not include ongoing social media posting. Existing clients re
 
 ## Design and interaction
 
-The homepage leads with the customer outcome, a real founder photograph, the service price, and a visible next action. Recognizable business problems come before the optional interactive example. Scope, onboarding, pricing, founder background, objections, and a fit check explain the purchase. The white/charcoal palette and restrained green accents remain.
+The homepage leads with the outcome “Make room for the work you love,” a visible action and fees, and a custom HTML/CSS visual of inquiry, approved email, and human handoff. Layered lilac, mint, and sky tones add depth. Small visual examples explain the three jobs FLP handles. These are explicitly illustrative, not live notifications, client results, or a functioning delivery system. The real founder photograph appears in the trust strip and founder section. The discarded home-styling stock-style concept is not referenced or deployed.
 
-Mobile layouts use a native expandable navigation menu, readable body copy, a compact founder image, full-width primary action, stacked example controls, and single-column scope at phone widths. The fit checker clears stale results when an answer changes. The illustrative journey sends no messages.
+Mobile layouts use a native expandable menu, readable body copy, full-width primary action, responsive visual compositions, stacked example controls, and single-column scope. The fit checker clears stale results when an answer changes. The illustrative journey sends no messages. All key service and guide content is available as static HTML.
 
-`qa/responsive.html` is an unlinked, noindex browser layout check for the public site at 320, 360, 390, 430, 768, and 1024 CSS pixels. It uses a same-origin iframe to exercise actual media queries, with section navigation and a read-only overflow report. It is not physical-device or Safari testing.
+`qa/responsive.html` is an unlinked, noindex layout check for the public site at 320, 360, 390, 430, 768, and 1024 CSS pixels. It uses a same-origin iframe to exercise media queries, with section navigation and a read-only overflow report. It distinguishes frame width from content width, which excludes a desktop scrollbar. It is not physical-device or Safari testing.
+
+## Search foundations
+
+- Dedicated, original guides at `/guides/lead-follow-up-for-service-businesses/` and `/guides/booking-page-checklist/` address different practical questions. Both connect to the scoped service and to each other. Their dates and organization byline are visible.
+- Every indexable page has a unique title, meta description, canonical URL, one H1, descriptive internal links, and static crawlable content.
+- The home page contains factual Organization, WebSite, and Service JSON-LD. Guides contain Article and BreadcrumbList JSON-LD. No fake ratings, invented results, or unsupported rich-result promises.
+- `sitemap.xml` includes the homepage and both guides. The QA page remains noindex and outside the sitemap. `robots.txt` allows public crawling.
+- The site remains a lightweight static build. New brand visuals use HTML/CSS/SVG and require no image downloads or animation runtime. The existing founder image has explicit dimensions and lazy loading in the lower section. Fonts use preconnect and font-display swap.
+- Public [Google Search Central guidance](https://developers.google.com/search/docs/fundamentals/seo-starter-guide) informed the crawlability, content, and navigation choices. Publishing does not establish indexing, rankings, or qualified demand. Search Console verification, submission, query data, conversion measurement, and keyword-volume/competition validation remain separate work.
 
 ## Positioning evidence, reviewed September 17–18, 2026
 
 - [U.S. Chamber 2025 technology report](https://www.uschamber.com/technology/empowering-small-business-the-impact-of-technology-on-u-s-small-business): 58% of surveyed small businesses self-reported generative AI use, up from 40% in 2024. This is adoption evidence, not demand for FLP or evidence of willingness to pay.
 - [Chamber small-business AI guidance, updated April 2026](https://www.uschamber.com/small-business/how-ai-can-help-small-businesses-compete-and-grow): practical uses include scheduling and customer follow-up; barriers include cost, skills, data readiness, and trust. Positioning inference: emphasize the task removed, clear costs, and approved messages.
+- [Lovable homepage](https://lovable.dev/): short, optimistic outcome language informed the tone. The implementation uses FLP’s own wording, visuals, and tightly bounded offer.
 - [HubSpot homepage](https://www.hubspot.com/): an outcome-led opening, clear actions, explanations, and proof precede deeper product detail. FLP adapts the ordering, using its own identity and only substantiated founder information. No conversion uplift has been measured for this change.
 - [Google Trends: lead follow up](https://trends.google.com/trends/explore?geo=US&q=lead%20follow%20up&hl=en-US), U.S., past 12 months: the rising related query “lead follow up software” displayed +80%. [Google Trends: appointment scheduling](https://trends.google.com/trends/explore?geo=US&q=appointment%20scheduling&hl=en-US) displayed “best appointment scheduling software for small business” at +600%, alongside unrelated DMV/BMV appointment queries. These are relative changes in related-query interest and can reflect small bases; they are not absolute monthly volumes, agency demand, or evidence that FLP’s fee is validated. Broad scheduling keywords mix commercial research with consumers booking appointments. Exact keyword-volume and competition estimates still require a connected research provider. Ubersuggest was suggested; it has not been confirmed connected.
 
