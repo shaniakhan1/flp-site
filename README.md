@@ -18,7 +18,20 @@ New engagements do not include ongoing social media posting. Existing clients re
 
 ## Design and interaction
 
-The approved first-interaction concept leads the page: a calm white and charcoal interface, restrained green accents, and three customer situations. Each situation changes the example email and explains FLP’s role. Public marketing uses service and setup-availability wording rather than internal pilot terminology. The fit checker clears stale results after an answer changes.
+The homepage leads with the customer outcome, a real founder photograph, the service price, and a visible next action. Recognizable business problems come before the optional interactive example. Scope, onboarding, pricing, founder background, objections, and a fit check explain the purchase. The white/charcoal palette and restrained green accents remain.
+
+Mobile layouts use a native expandable navigation menu, readable body copy, a compact founder image, full-width primary action, stacked example controls, and single-column scope at phone widths. The fit checker clears stale results when an answer changes. The illustrative journey sends no messages.
+
+`qa/responsive.html` is an unlinked, noindex browser layout check for the public site at 320, 360, 390, 430, 768, and 1024 CSS pixels. It uses a same-origin iframe to exercise actual media queries, with section navigation and a read-only overflow report. It is not physical-device or Safari testing.
+
+## Positioning evidence, reviewed September 17–18, 2026
+
+- [U.S. Chamber 2025 technology report](https://www.uschamber.com/technology/empowering-small-business-the-impact-of-technology-on-u-s-small-business): 58% of surveyed small businesses self-reported generative AI use, up from 40% in 2024. This is adoption evidence, not demand for FLP or evidence of willingness to pay.
+- [Chamber small-business AI guidance, updated April 2026](https://www.uschamber.com/small-business/how-ai-can-help-small-businesses-compete-and-grow): practical uses include scheduling and customer follow-up; barriers include cost, skills, data readiness, and trust. Positioning inference: emphasize the task removed, clear costs, and approved messages.
+- [HubSpot homepage](https://www.hubspot.com/): an outcome-led opening, clear actions, explanations, and proof precede deeper product detail. FLP adapts the ordering, using its own identity and only substantiated founder information. No conversion uplift has been measured for this change.
+- [Google Trends: lead follow up](https://trends.google.com/trends/explore?geo=US&q=lead%20follow%20up&hl=en-US), U.S., past 12 months: the rising related query “lead follow up software” displayed +80%. [Google Trends: appointment scheduling](https://trends.google.com/trends/explore?geo=US&q=appointment%20scheduling&hl=en-US) displayed “best appointment scheduling software for small business” at +600%, alongside unrelated DMV/BMV appointment queries. These are relative changes in related-query interest and can reflect small bases; they are not absolute monthly volumes, agency demand, or evidence that FLP’s fee is validated. Broad scheduling keywords mix commercial research with consumers booking appointments. Exact keyword-volume and competition estimates still require a connected research provider. Ubersuggest was suggested; it has not been confirmed connected.
+
+Keyword hypotheses to validate: lead follow-up service, automated lead follow-up, booking automation setup, and appointment scheduling setup. Broader AI automation searches may be educational; software searches may come from DIY buyers. The offer remains one managed inquiry/booking workflow. Do not add unrelated services or create thin keyword pages based on unverified volume.
 
 ## Local preview
 
