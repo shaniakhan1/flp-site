@@ -7,8 +7,8 @@ document.getElementById('width').addEventListener('change',e=>{frame.style.width
 document.getElementById('section').addEventListener('change',e=>{frame.src='../?qa=responsive'+(e.target.value?'#'+e.target.value:'');});
 document.getElementById('inspect').addEventListener('click',()=>{
  const d=frame.contentDocument,w=frame.contentWindow,viewport=d.documentElement.clientWidth;
- const overflows=Array.from(d.body.querySelectorAll('*')).filter(el=>{const r=el.getBoundingClientRect(),s=w.getComputedStyle(el);return s.display!=='none'&&r.width>0&&(r.right>viewport+1||r.left< -1);}).map(el=>el.tagName.toLowerCase()+(el.id?'#'+el.id:el.className?'.'+String(el.className).trim().replace(/\s+/g,'.'):''));
+ const overflows=Array.from(d.body.querySelectorAll('*')).filter(el=>{const r=el.getBoundingClientRect(),s=w.getComputedStyle(el);return !el.closest('details:not([open]) nav')&&s.display!=='none'&&r.width>0&&(r.right>viewport+1||r.left< -1);}).map(el=>el.tagName.toLowerCase()+(el.id?'#'+el.id:el.className?'.'+String(el.className).trim().replace(/\s+/g,'.'):''));
  const cta=d.querySelector('.hero-actions .button').getBoundingClientRect();
- document.getElementById('results').textContent=JSON.stringify({viewport,documentWidth:d.documentElement.scrollWidth,bodyWidth:d.body.scrollWidth,horizontalOverflow:overflows,openingCtaBottom:Math.round(cta.bottom+w.scrollY),viewportHeight:w.innerHeight,heading:d.querySelector('h1').textContent},null,2);
+ document.getElementById('results').textContent=JSON.stringify({frameWidth:w.innerWidth,contentWidth:viewport,documentWidth:d.documentElement.scrollWidth,bodyWidth:d.body.scrollWidth,horizontalOverflow:overflows,openingCtaBottom:Math.round(cta.bottom+w.scrollY),viewportHeight:w.innerHeight,heading:d.querySelector('h1').textContent},null,2);
 });
 </script></body></html>
