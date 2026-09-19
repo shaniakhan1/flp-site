@@ -1,1 +1,1 @@
-{"name":"flp-client-journey","private":true,"type":"module","engines":{"node":">=24"},"scripts":{"start":"node server.mjs","test":"node --test test.mjs"},"dependencies":{"cheerio":"1.2.0","ipaddr.js":"2.2.0","robots-parser":"3.0.1","stripe":"22.4.0"}}
+{"name":"flp-client-journey","private":true,"type":"module","engines":{"node":">=24"},"scripts":{"start":"node server.mjs","test":"node --test test.mjs identity-test.mjs"},"dependencies":{"cheerio":"1.2.0","ipaddr.js":"2.2.0","robots-parser":"3.0.1","stripe":"22.4.0"}}
