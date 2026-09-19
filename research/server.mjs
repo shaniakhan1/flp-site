@@ -5,9 +5,11 @@ import {runCheck,validate} from './check.mjs';
 export function createServer({key=process.env.BRAVE_SEARCH_API_KEY, token=process.env.FLP_RESEARCH_TOKEN, answers=process.env.FLP_ENABLE_ANSWERS==='true', run=runCheck}={}) {
   if(!token || token.length<32) throw new Error('Set FLP_RESEARCH_TOKEN to a random secret of at least 32 characters.');
   let busy=false, count=0, windowStart=Date.now();
-  return http.createServer(async(req,res)=>{
-    const send=(status,data)=>{res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(data));};
-    if(req.url==='/health' && req.method==='GET') return send(200,{status:'ok',searchConfigured:Boolean(key),answersEnabled:answers});
+  const server = http.createServer({maxHeaderSize:8192},async(req,res)=>{
+    const send=(status,data)=>{res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer','X-Frame-Options':'DENY'});res.end(JSON.stringify(data));};
+    if(req.url==='/health' && req.method==='GET') return send(200,{status:'ok'});
+    // This is an operator API, never a public browser submission endpoint.
+    if(req.headers.origin) return send(403,{error:'Browser submissions are not accepted.'});
     const supplied=Buffer.from(req.headers.authorization || ''), expected=Buffer.from(`Bearer ${token}`);
     if(supplied.length!==expected.length || !timingSafeEqual(supplied,expected)) return send(401,{error:'Unauthorized'});
     if(req.url!=='/checks' || req.method!=='POST') return send(404,{error:'Not found'});
@@ -16,6 +18,7 @@ export function createServer({key=process.env.BRAVE_SEARCH_API_KEY, token=proces
     if(Date.now()-windowStart>3600000){windowStart=Date.now();count=0;}
     if(count>=5) return send(429,{error:'Hourly operator limit reached.'});
     if(!(req.headers['content-type'] || '').startsWith('application/json')) return send(415,{error:'Send JSON.'});
+    if(Number(req.headers['content-length'] || 0)>4096) return send(413,{error:'Request too large.'});
     busy=true;
     try {
       let body='',bytes=0;
@@ -29,6 +32,11 @@ export function createServer({key=process.env.BRAVE_SEARCH_API_KEY, token=proces
     } catch {if(!res.headersSent)send(500,{error:'Check could not be completed.'});}
     finally {busy=false;}
   });
+  server.maxConnections=32;
+  server.requestTimeout=15000;
+  server.headersTimeout=10000;
+  server.keepAliveTimeout=5000;
+  return server;
 }
 if(process.argv[1]?.endsWith('/server.mjs')) {
   const server=createServer();server.requestTimeout=15000;server.headersTimeout=10000;
