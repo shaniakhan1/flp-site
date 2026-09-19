@@ -1,0 +1,5 @@
+exclude:
+  - research
+  - qa
+  - README.md
+  - SECURITY.md

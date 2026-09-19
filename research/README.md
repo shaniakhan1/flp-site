@@ -4,7 +4,7 @@ Status: implementation and fixture tests only. No live provider call, paid plan,
 
 Node 22+, no packages. Run `npm test` in this directory.
 
-Set `FLP_RESEARCH_TOKEN` to a random secret of at least 32 characters and `BRAVE_SEARCH_API_KEY` through the hosting provider's secret controls. Run `npm start`. Default bind is localhost:8787. Set HOST=0.0.0.0 only behind HTTPS hosting. Keep the token out of the public website. POST JSON to `/checks` with Bearer authorization and business, website, location, service. `/health` exposes configuration booleans only.
+Set `FLP_RESEARCH_TOKEN` to a random secret of at least 32 characters and `BRAVE_SEARCH_API_KEY` through the hosting provider's secret controls. Run `npm start`. Default bind is localhost:8787. Set HOST=0.0.0.0 only behind HTTPS hosting. Keep the token out of the public website. POST JSON to `/checks` with Bearer authorization and business, website, location, service. `/health` exposes only a generic status. Browser-origin submissions are rejected.
 
 The default measures five questions on Brave's web index. Set FLP_ENABLE_ANSWERS=true only after activating the separate Answers plan and setting a provider spending cap. That adds five Brave Answers API observations, never consumer ChatGPT/Claude/Gemini claims. Discovery prompts do not include the target brand. The branded identity prompt is tracked separately.
 

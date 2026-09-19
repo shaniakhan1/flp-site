@@ -47,3 +47,19 @@ test('operator endpoint denies anonymous use and fails closed without provider',
     assert.equal((await fetch(url+'/checks',{method:'POST',headers:{Authorization:`Bearer ${token}`}})).status,503);
   }finally{server.closeAllConnections();await new Promise(r=>server.close(r));}
 });
+test('operator rejects browser requests and oversized bodies before running searches',async()=>{
+  const token='z'.repeat(32);let calls=0;
+  const server=createServer({token,key:'fixture',run:async()=>{calls++;return {};}});
+  await new Promise(r=>server.listen(0,'127.0.0.1',r));
+  const url=`http://127.0.0.1:${server.address().port}/checks`;
+  const headers={Authorization:`Bearer ${token}`,'Content-Type':'application/json'};
+  try{
+    const denied=await fetch(url,{method:'POST',headers:{...headers,Origin:'https://flpmarketinggroup.com'},body:JSON.stringify(business)});
+    assert.equal(denied.status,403);assert.equal(denied.headers.get('x-frame-options'),'DENY');
+    assert.equal((await fetch(url,{method:'POST',headers,body:'x'.repeat(5000)})).status,413);
+    assert.equal(calls,0);
+    for(let n=0;n<5;n++)assert.equal((await fetch(url,{method:'POST',headers,body:JSON.stringify(business)})).status,200);
+    assert.equal((await fetch(url,{method:'POST',headers,body:JSON.stringify(business)})).status,429);
+    assert.equal(calls,5);
+  }finally{server.closeAllConnections();await new Promise(r=>server.close(r));}
+});
