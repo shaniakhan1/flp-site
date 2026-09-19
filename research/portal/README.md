@@ -45,3 +45,10 @@ Attach durable host storage, configure hosting origin and operator secret, resol
 `identity-cli.mjs` runs a controlled capture → plan → review/apply → recapture/verify cycle for a confirmed founding year. It only changes an existing Organization with the matching business name and website origin, updates the associated CSP hash, and refuses conflicting facts, unsupported CSP, stale source, or modified drafts. No claimed ranking benefit.
 
 Provide a private facts JSON with `business`, `website`, `foundingYear`, `confirmed: true`, and a source describing owner confirmation. Keep this and all captures/plans/reports outside the public repository. Run `node identity-cli.mjs` for commands. Publication to the business's host is still a separate authorized step. This is the first narrow correction engine, not a completed WordPress connector or autonomous publishing product.
+
+
+## Service-page drafting workflow
+
+The public `/page-draft/` tool uses the shared `/assets/service-page.mjs` module to assemble a page from owner-confirmed details. It runs entirely in the browser, stores no answers, requires a separate approval for HTML export, and explicitly does not publish or research the business. Editing the input invalidates the approval. No paid provider is involved.
+
+`page-workflow.mjs` is an operator adapter for existing FLP-style article pages in this repository. It prepares an exact-source draft, updates title, description, copy, WebPage metadata and CSP hashes, requires approval, and verifies the published HTML against the approved draft. Run it from a full repository checkout; it imports the shared asset outside the portal Docker context and is not exposed by the portal server. GitHub publication remains an authorized operator step, not a customer self-service connection. WordPress and other platform connectors are not implemented.

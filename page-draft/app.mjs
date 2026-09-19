@@ -1,0 +1,9 @@
+import{makeDraft,renderBody,renderDocument,plainText}from'/assets/service-page.mjs';
+const $=id=>document.getElementById(id);let draft=null,approved=false;
+const say=s=>$('status').textContent=s;
+function invalidate(){draft=null;approved=false;$('approval').checked=false;$('export').disabled=true;$('copy').disabled=true;$('review').hidden=true;}
+$('draft-form').addEventListener('input',invalidate);
+$('draft-form').onsubmit=e=>{e.preventDefault();try{const f=Object.fromEntries(new FormData(e.target));f.confirmed=$('facts-confirmed').checked;draft=makeDraft(f);$('preview-title').textContent=draft.heading;$('preview-intro').textContent=draft.intro;$('preview-body').innerHTML=renderBody(draft);$('search-title').textContent=draft.title;$('search-description').textContent=draft.description;$('review').hidden=false;$('copy').disabled=false;say('Your draft is ready. Review the facts, scope, and links before approving it.');$('review').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}catch(e){say(e.message);}};
+$('approval').onchange=()=>{approved=$('approval').checked;$('export').disabled=!approved||!draft;};
+$('copy').onclick=async()=>{try{await navigator.clipboard.writeText(plainText(draft));say('Page copy copied.');}catch{say('Copy was unavailable. You can select the draft text or download the approved page.');}};
+$('export').onclick=()=>{try{const text=renderDocument(draft,{approved});const url=URL.createObjectURL(new Blob([text],{type:'text/html'}));const a=document.createElement('a');a.href=url;a.download='service-page.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);say('Approved page downloaded. It is not live yet. Upload it through your website platform or send it to your website manager.');}catch(e){say(e.message);}};
