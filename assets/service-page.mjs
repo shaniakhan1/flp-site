@@ -1,12 +1,12 @@
 // Shared, deterministic page drafting. Uses only facts supplied and confirmed by the owner.
 export const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function field(v,key,max=500){if(typeof v[key]!=='string'||!v[key].trim()||v[key].length>max)throw Error(`Complete ${key} (${max} characters maximum).`);return v[key].trim();}
-export function safeLink(value){const u=new URL(value);if(u.protocol!=='https:'||u.username||u.password)throw Error('Use an HTTPS link without a login.');return u.href;}
+export function safeLink(value){const raw=String(value).trim();const u=new URL(/^[a-z][a-z0-9+.-]*:/i.test(raw)?raw:`https://${raw}`);if(u.protocol!=='https:'||u.username||u.password)throw Error('Use an HTTPS link without a login.');return u.href;}
 export function makeDraft(input){
  if(input.confirmed!==true)throw Error('Confirm your business details before making a draft.');
  const f={business:field(input,'business',100),service:field(input,'service',100),audience:field(input,'audience',150),location:field(input,'location',100),summary:field(input,'summary',300),process:field(input,'process',1000),limits:field(input,'limits',1000),cta:field(input,'cta',80),website:safeLink(field(input,'website',300)),contact:safeLink(field(input,'contact',300)),pageURL:safeLink(field(input,'pageURL',300))};
  if(new URL(f.pageURL).origin!==new URL(f.website).origin)throw Error('The page URL must belong to your business website.');
- const items=Array.isArray(input.deliverables)?input.deliverables:String(input.deliverables||'').split('\n');
+ const items=(Array.isArray(input.deliverables)?input.deliverables:String(input.deliverables||'').split('\n')).map(s=>typeof s==='string'?s.trim():s).filter(s=>s!=='');
  if(items.length<2||items.length>8||items.some(s=>typeof s!=='string'||!s.trim()||s.length>240))throw Error('Add 2 to 8 specific deliverables, one per line (240 characters each).');
  f.deliverables=items.map(s=>s.trim());
  const title=`${f.service} | ${f.business}`;
