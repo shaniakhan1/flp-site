@@ -39,3 +39,9 @@ Durable global quota 50 audits/day, domain quota 3/day, max queue 10, worker con
 ## Remaining activation work
 
 Attach durable host storage, configure hosting origin and operator secret, resolve Cloudflare challenge loop, provision Turnstile, install a Stripe restricted key and webhook in sandbox then production, and test actual public-domain rendering and payment flow. Public scans and payment are disabled without these settings. Do not point the homepage CTA at an unconfigured backend.
+
+## First supported fact correction
+
+`identity-cli.mjs` runs a controlled capture → plan → review/apply → recapture/verify cycle for a confirmed founding year. It only changes an existing Organization with the matching business name and website origin, updates the associated CSP hash, and refuses conflicting facts, unsupported CSP, stale source, or modified drafts. No claimed ranking benefit.
+
+Provide a private facts JSON with `business`, `website`, `foundingYear`, `confirmed: true`, and a source describing owner confirmation. Keep this and all captures/plans/reports outside the public repository. Run `node identity-cli.mjs` for commands. Publication to the business's host is still a separate authorized step. This is the first narrow correction engine, not a completed WordPress connector or autonomous publishing product.

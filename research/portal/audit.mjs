@@ -20,6 +20,7 @@ export async function fetchPage(value,redirects=0,follow=true){
 }
 export function analyzeHTML(html,url,input,headers={}){
  const $=load(html);$('script:not([type="application/ld+json"]),style,noscript,template').remove();
+ $('br').replaceWith(' ');
  const title=$('title').first().text().trim(),h1=$('h1').map((i,e)=>$(e).text().trim()).get();
  const desc=$('meta[name="description"]').attr('content')?.trim()||'';
  const robots=($('meta[name="robots"]').attr('content')||'')+' '+(headers['x-robots-tag']||'');
