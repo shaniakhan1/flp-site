@@ -1,0 +1,16 @@
+/* Content is visible without JavaScript. Motion never controls access to content. */
+.pointer-ink{position:fixed;inset:0;pointer-events:none;z-index:6;contain:strict}
+.motion-control{font-weight:500;line-height:1.2;font-family:inherit;font-size:11px;letter-spacing:.04em;min-height:44px;padding:10px 15px;border:1px solid #c8d2df;border-radius:100px;color:#243d5a;background:#fff;cursor:pointer;justify-self:start;align-self:start}
+.motion-control:focus-visible{outline:3px solid #6399df;outline-offset:4px}
+.motion-control:disabled{cursor:default;opacity:.85}
+.conversation-art .motion-control{position:absolute;bottom:20px;left:22px;z-index:4;background:rgba(14,31,49,.85);color:#fff;border-color:rgba(255,255,255,.4);backdrop-filter:blur(8px)}
+.flp-motion .conversation-art img{animation:flp-drift 12s ease-in-out infinite;transform-origin:50% 60%;will-change:transform}
+.flp-motion .conversation-art::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at var(--pointer-x,60%) var(--pointer-y,35%),rgba(107,172,242,.2),transparent 55%);mix-blend-mode:screen}
+.flp-motion .conversation-art::before{content:'';position:absolute;z-index:2;pointer-events:none;inset:-50%;background:linear-gradient(112deg,transparent 42%,rgba(165,203,251,.12) 49%,transparent 56%);animation:flp-light 9s ease-in-out infinite}
+@keyframes flp-drift{0%,100%{transform:scale(1.035) translateY(0)}50%{transform:scale(1.065) translateY(-7px)}}
+@keyframes flp-light{0%,100%{transform:translateX(-18%) rotate(-6deg);opacity:.15}50%{transform:translateX(18%) rotate(6deg);opacity:1}}
+.flp-motion .button{transition:transform .22s ease,background .22s ease,box-shadow .22s ease}
+.flp-motion .service-card,.flp-motion .preview-grid img,.flp-motion .work-gallery img{transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s ease}
+@media(hover:hover) and (pointer:fine){.flp-motion .button:hover{transform:translateY(-3px);box-shadow:0 8px 20px #182b4620}.flp-motion .button:active{transform:translateY(0)}.flp-motion .service-card:hover{transform:translateY(-5px);box-shadow:0 14px 35px #182b4610}.flp-motion .preview-grid a:hover img,.flp-motion .work-gallery a:hover img{transform:translateY(-4px);box-shadow:0 12px 30px #182b4618}}
+.motion-paused .conversation-art img,.motion-paused .conversation-art::before{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.pointer-ink{display:none}.flp-motion .conversation-art img,.flp-motion .conversation-art::before{animation:none!important}.flp-motion .button,.flp-motion .service-card,.flp-motion .preview-grid img,.flp-motion .work-gallery img{transition:none!important;transform:none!important}}
