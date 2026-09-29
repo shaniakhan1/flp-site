@@ -41,17 +41,28 @@
     canvas.style.width = innerWidth + 'px'; canvas.style.height = innerHeight + 'px';
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0); clear();
   }
+  // A small champagne glow with sparse gold glints, never a drawn cursor line.
   function draw(now) {
     ctx.clearRect(0, 0, innerWidth, innerHeight);
-    trail = trail.filter(p => now - p.time < 380);
-    if (trail.length > 1) {
-      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      for (let i = 1; i < trail.length; i++) {
-        const p = trail[i], previous = trail[i - 1];
-        ctx.strokeStyle = `rgba(67,113,180,${0.23 * (1 - (now-p.time)/380)})`;
-        ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(previous.x,previous.y);
-        ctx.quadraticCurveTo(previous.x,p.y,p.x,p.y); ctx.stroke();
-      }
+    trail = trail.filter(p => now - p.time < 520);
+    const latest = trail[trail.length - 1];
+    if (latest) {
+      const alpha = Math.max(0, 1 - (now - latest.time) / 420);
+      const glow = ctx.createRadialGradient(latest.x, latest.y, 1, latest.x, latest.y, 27);
+      glow.addColorStop(0, `rgba(226,187,99,${alpha * .28})`);
+      glow.addColorStop(.4, `rgba(238,211,151,${alpha * .16})`);
+      glow.addColorStop(1, 'rgba(238,211,151,0)');
+      ctx.fillStyle=glow; ctx.beginPath(); ctx.arc(latest.x,latest.y,27,0,Math.PI*2); ctx.fill();
+      trail.forEach(p => {
+        if (!p.spark) return;
+        const age=(now-p.time)/520, fade=Math.sin(Math.PI*age);
+        const x=p.x+p.dx, y=p.y+p.dy-age*7, size=p.size*(1-age*.4);
+        ctx.fillStyle=`rgba(181,135,48,${fade*.7})`;
+        ctx.beginPath(); ctx.moveTo(x,y-size); ctx.lineTo(x+size*.25,y-size*.25);
+        ctx.lineTo(x+size,y); ctx.lineTo(x+size*.25,y+size*.25);
+        ctx.lineTo(x,y+size); ctx.lineTo(x-size*.25,y+size*.25);
+        ctx.lineTo(x-size,y); ctx.lineTo(x-size*.25,y-size*.25);ctx.closePath();ctx.fill();
+      });
     }
     frame = trail.length ? requestAnimationFrame(draw) : 0;
   }
@@ -94,6 +105,7 @@
     },{passive:true});
     art.addEventListener('pointerleave',()=>{art.style.removeProperty('--pointer-x');art.style.removeProperty('--pointer-y');});
   }
+  let lastSpark = 0;
   document.addEventListener('pointermove',e=>{
     if (!enabled || !fine.matches || e.pointerType === 'touch' || document.hidden || e.target.closest('input,textarea,iframe,select')) return;
     if (!canvas) {
@@ -101,7 +113,11 @@
       ctx=canvas.getContext('2d'); if (!ctx) {canvas=null;return;}
       document.body.append(canvas); resize();
     }
-    trail.push({x:e.clientX,y:e.clientY,time:performance.now()}); if (trail.length>16) trail.shift();
+    const now=performance.now(), spark=now-lastSpark>85;
+    if(spark) lastSpark=now;
+    trail=trail.filter(p=>p.spark);
+    trail.push({x:e.clientX,y:e.clientY,time:now,spark,dx:(Math.random()-.5)*22,dy:(Math.random()-.5)*22,size:2+Math.random()*2});
+    if(trail.length>8) trail.shift();
     if (!frame) frame=requestAnimationFrame(draw);
   },{passive:true});
   document.addEventListener('pointerleave',clear);
