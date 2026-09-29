@@ -6,6 +6,26 @@
   try { optedOut = localStorage.getItem('flp-motion-off') === '1'; } catch {}
   let enabled = false, observer, canvas, ctx, frame = 0, trail = [], animations = [];
   const art = document.querySelector('.conversation-art');
+  let confettiButton;
+  if (art) {
+    const sticker=document.createElement('span');sticker.className='conversation-sticker';sticker.textContent='Worth talking about.';sticker.setAttribute('aria-hidden','true');art.append(sticker);
+    const star=document.createElement('span');star.className='conversation-spark';star.textContent='✦';star.setAttribute('aria-hidden','true');art.append(star);
+    confettiButton=document.createElement('button');confettiButton.type='button';confettiButton.className='confetti-button';confettiButton.textContent='Throw some confetti ✦';art.append(confettiButton);
+    confettiButton.addEventListener('click',()=>{
+      if (!enabled || document.querySelector('.flp-confetti')) return;
+      const layer=document.createElement('div');layer.className='flp-confetti';layer.setAttribute('aria-hidden','true');document.body.append(layer);
+      const rect=confettiButton.getBoundingClientRect();
+      for(let i=0;i<28;i++) {
+        const piece=document.createElement('span');piece.className='confetti-piece';
+        piece.style.left=(rect.left+rect.width/2)+'px';piece.style.top=(rect.top+rect.height/2)+'px';
+        piece.style.background=['#5578df','#e6ec98','#efabc8','#a6cbd9'][i%4];
+        if(i%3===0)piece.style.borderRadius='50%';layer.append(piece);
+        const dx=(Math.random()-.65)*Math.min(innerWidth,700),dy=-100-Math.random()*240;
+        piece.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${dx*.6}px,${dy}px) rotate(${i*17}deg)`,opacity:1,offset:.45},{transform:`translate(${dx}px,${180+Math.random()*220}px) rotate(${i*37}deg)`,opacity:0}],{duration:1100+Math.random()*500,easing:'cubic-bezier(.2,.65,.5,1)',fill:'forwards'});
+      }
+      setTimeout(()=>layer.remove(),1700);
+    });
+  }
   const control = document.createElement('button');
   control.type = 'button'; control.className = 'motion-control';
   (art || document.querySelector('.footer'))?.append(control);
@@ -42,6 +62,8 @@
     control.setAttribute('aria-label', reduced.matches ? 'Motion off: device prefers reduced motion' : 'Decorative motion');
     control.setAttribute('aria-pressed', String(enabled));
     control.disabled = reduced.matches;
+    if(confettiButton) {confettiButton.disabled=!enabled;confettiButton.title=enabled?'A small celebration':'Enable motion to throw confetti';}
+    if(!enabled) document.querySelector('.flp-confetti')?.remove();
     if (!enabled) { clear(); observer?.disconnect(); animations.forEach(a=>a.cancel()); animations=[]; }
     else {
       if ('IntersectionObserver' in window) {
