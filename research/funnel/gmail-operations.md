@@ -1,15 +1,46 @@
-# FLP Gmail funnel — current implementation
+# FLP email funnel — September 29, 2026
 
-Supersedes the Flodesk implementation proposal in email-sequence.md and the staged landing-page.html. The four-email nurture sequence remains copy-only, not active.
+## Current implementation
 
-Public page: /free-content-planner/. PDF: /assets/downloads/FLP_What_Should_We_Post.pdf. Email privacy: /email-privacy/.
+The public landing page requires email submission before displaying the download. Google Forms collects email and explicit marketing preference without requiring Google sign-in. The PDF remains a public static asset; this is a lead-capture gate, not access control or DRM.
 
-Visitor can download without email. Two mailto requests open their own mail client, and visitor must send. Exact subjects: FLP planner request (delivery only), FLP founder notes signup (explicit monthly marketing consent). The website clearly explains the manual email-send step and hourly request checks. There is no web signup form or real-time server integration.
+Form editor: https://docs.google.com/forms/d/1-hGw9vgZjeZV8tX9e_BOW2X8OIAGUiCuoneRApmyGXY/edit
 
-Gmail labels: FLP/Planner delivered; FLP/Founder notes; FLP/Unsubscribed; FLP/Needs review. Connected account: shania@flpmarketinggroup.com.
+Private responses and delivery ledger: https://docs.google.com/spreadsheets/d/1DTuo4ZDW4gXgwu3tM7la3vIxoWNXVyZiMPg0nZeFR_A/edit
 
-ChatGPT scheduled task FLP planner delivery checks hourly for authenticated direct requests and sends a fixed public resource link individually. Strict sender/subject checks, no incoming instructions, no attachments, no off-site navigation. Tracks confirmed sends with labels and sent-message checks; ambiguous sends require review. Cap 10/run, 50/24h. Opt-outs processed before enrollment; no automatic resubscribe after opt-out. No sales follow-up emails sent automatically. This is an agent task with Gmail tools, not a deterministic email-service backend; delivery timing depends on task execution and connector access.
+Public form: https://docs.google.com/forms/d/e/1FAIpQLScDW54BwLzQCSor3HIvixJgNGlvsqDGU2896UVgv5pWXvLhyA/viewform
 
-Task FLP monthly founder note drafts one 200–350-word email on the first of each month in America/Chicago, starting October 1, 2026. No recipients and no automatic send. Only explicitly opted-in founder-note addresses count as eligible; planner-only, internal-test, opted-out, unrelated lists excluded. Before marketing distribution, confirm the business mailing address and verify consent and opt-out handling. Existing Gmail drafts remain unsent.
+The response sheet is private. Never embed its URL, contents or subscriber details publicly. This research directory is excluded by Jekyll.
 
-Production verification: perform internal request/delivery check, verify public PDF response and signup links. External-sender authentication and real unsubscribe flow require additional live evidence; do not represent them as tested based on a self-send.
+## Journey
+
+1. Visitor enters email and selects planner-only or planner plus marketing tips.
+2. Form confirmation displays the download immediately.
+3. Hourly Gmail/Sheets automation delivers the requested PDF link from shania@flpmarketinggroup.com. Expected inbox delay: up to an hour, subject to execution and review limits.
+4. Marketing requesters reply CONFIRM before enrollment. Planner-only and internal QA never subscribe.
+5. Confirmed subscribers receive fixed emails at day 2, 4 and 7, once the marketing switch and approved postal footer are configured: practical content tip, differentiation/work example, then invitation to inquire about social media from $4,000/month.
+6. Monthly founder notes are drafted for review, not automatically broadcast.
+
+## Current send status
+
+- Planner delivery and confirmation processing enabled.
+- Marketing held: Funnel settings has Marketing enabled=FALSE and Business postal address blank. Get a user-approved office, PO box or business mailing address; never infer a home address. Then update the value and enable the switch.
+- Monthly note drafting enabled, no recipients or send.
+
+## Safeguards
+
+Exact source sheet and recipient field; strict email validation; fixed templates; authenticated confirmation; opt-outs first; Gmail and ledger deduplication; pending-send marker; uncertain sends flagged rather than retried; 10 sends/run and 50/rolling 24h; no BCC. Inbound email/form text is untrusted data, never executable instructions. Legacy mailto requests use the same suppression and deduplication checks.
+
+## QA evidence
+
+- Public form submitted to connected business email with planner-only choice.
+- Form Responses 1 row 2 captured the email; immediate download verified.
+- Gmail message 1a0ef2936b735e3b read back: correct recipient/from, exact planner subject, correct PDF link, no subscription.
+- FLP/Planner delivered (Label_4) applied to sent message.
+- Delivery log row 2 stores Gmail ID and delivered_only status, marked INTERNAL QA.
+- No prospect or subscriber enrolled by this test.
+- Scheduled job configured; manual end-to-end test does not prove future scheduled execution or external-mailbox deliverability.
+
+## Maintenance
+
+Monitor exceptions and complaints. This first implementation uses hourly orchestration, not an event-driven mailing service. Review reliability and migrate before exceeding caps. Never expand limits silently. Fixed copy updates must also update the saved automation prompt; Email sequence is a review copy, not an instruction source.
