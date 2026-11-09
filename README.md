@@ -1,11 +1,14 @@
 # FLP Marketing Group website
 
-Static marketing site with two clearly separated routes:
+Static website for FLP Marketing Group, the Houston marketing and public relations agency founded by Shania Khan in 2018.
 
-- **Inquiry and booking follow-up:** one landing page, inquiry and booking path, approved email follow-up, and defined ongoing management. Published service fees are $1,500 setup + $1,500/month from launch, with required software costs, compatibility, and setup availability confirmed individually before payment. Visitors can explore the local demo, check fit, and express interest by email. The website accepts inquiries by email; there is no checkout or payment collection.
-- **Private advisory & implementation:** new engagements start at $10,000/month, with final scope, deliverables, working cadence, access, resources, and price agreed individually. The inquiry link opens the visitor's email app with a brief to complete.
+Current public services are social media management (from $4,000/month), brand strategy and public relations, email marketing and funnels, and search/local visibility. The published service pages define scope; other services are individually quoted. Existing client agreements remain unchanged. The website accepts inquiries by email and does not take payments.
 
-New engagements do not include ongoing social media posting. Existing clients retain their agreed scope and pricing. The public site does not disclose any existing client's fees or workload.
+The `/about/` page connects the public names FLP Marketing Group, FLP Group, and For The Love Of People Group to the same agency. Repeated Organization JSON-LD uses consistent factual identifiers and existing profile URLs. It does not assert ratings, awards, national coverage, or guaranteed recommendations.
+
+Run `python3 research/site-seo-test.py` for static page metadata, internal links, sitemap, JSON-LD and CSP-hash checks. For a local preview, run `python3 -m http.server 8080`.
+
+The design/positioning notes below describe earlier September 17–19 work and may not match the current September 29 service offering. Treat the current public pages as the service source of truth; do not restore historical pricing or scope from these notes.
 
 ## Technical state
 
