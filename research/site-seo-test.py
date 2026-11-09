@@ -107,6 +107,23 @@ class DiscoveryTests(unittest.TestCase):
                 self.assertEqual(PAGES[path].canonicals, [loc])
                 self.assertNotIn('noindex', PAGES[path].meta.get('robots', ''))
 
+    def test_social_service_contains_scoped_work_examples(self):
+        page = PAGES[ROOT / 'social-media-management/index.html']
+        self.assertIn('<h1>Social media management in Houston.</h1>', page.text)
+        self.assertIn('/work/joyleaf/', page.links)
+        self.assertIn('/work/dharsh/', page.links)
+        self.assertIn('/working-together/', page.links)
+        self.assertIn('JOYLEAF · ROSELLE, NEW JERSEY', page.text)
+        self.assertIn('artwork shown here is historical', page.text)
+        self.assertIn('starts at $4,000/month', page.text)
+        self.assertIn('Original filming and travel require a separate production scope', page.text)
+        self.assertIn('They do not claim measured follower growth, leads, or sales', page.text)
+        self.assertEqual(len(re.findall(r'<img\b', page.text)), 2)
+        for src, width, height in re.findall(r'<img[^>]+src="([^"]+)"[^>]+width="(\d+)"[^>]+height="(\d+)"', page.text):
+            self.assertTrue((ROOT / src.lstrip('/')).is_file())
+            self.assertGreater(int(width), 0)
+            self.assertGreater(int(height), 0)
+
     def test_about_is_linked_and_factually_bounded(self):
         home = PAGES[ROOT / 'index.html']
         about = PAGES[ROOT / 'about/index.html']
