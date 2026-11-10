@@ -40,6 +40,17 @@ PAGES = {p: Page(p) for p in ROOT.rglob('*.html')
 
 
 class DiscoveryTests(unittest.TestCase):
+    def test_public_review_excerpts_have_attribution(self):
+        home = (ROOT / 'index.html').read_text()
+        self.assertIn('id="reviews"', home)
+        for name in ['Dharshini Casinathen', 'Lea Hamadeh', 'Chelsea Edwards']:
+            self.assertIn(name, home)
+        self.assertIn('Google review excerpt', home)
+        self.assertIn('Selected excerpts, checked November 9, 2026', home)
+        self.assertIn('query_place_id=ChIJxexs5GPNQIYRvstzf0ehVcA', home)
+        self.assertIn('Television reporter', home)
+        self.assertNotIn('aggregateRating', home)
+
     def test_page_basics_and_unique_titles(self):
         titles = []
         for page in PAGES.values():
